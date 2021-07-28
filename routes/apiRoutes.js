@@ -61,7 +61,10 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-router.put("/api/workouts/:id", ({ day, "excercises": [] }, res) => {
+
+// body = { day, "excercises": [] } ???
+
+router.put("/api/workouts/:id", ( { body }, res) => {
     db.day.findByIdAndUpdate(
         params.id, { $push: { exercises: body } }, { new: true, runValidators: true }
     )
