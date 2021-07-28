@@ -6,7 +6,7 @@ const db = require("../models/day")
 //get all aggregate
 router.get("/api/workouts", (req, res) => {
 
-    db.day.aggregate([
+    db.day.exercises.aggregate([
         
         {
 
