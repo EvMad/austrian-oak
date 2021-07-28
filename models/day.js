@@ -53,4 +53,4 @@ const daySchema = new Schema(
 
 const day = mongoose.model("Day", daySchema);
 
-modules.exports = day;
+module.exports = day;
