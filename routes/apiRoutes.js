@@ -2,6 +2,8 @@ const router = require('express').Router()
 
 const db = require("../models/day")
 
+
+//get all aggregate
 router.get("/api/workouts", (req, res) => {
 
     db.day.aggregate([
@@ -24,6 +26,8 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
+
+// get range aggregate
 router.get("/api/workouts/range", (req, res) => {
     db.day.find({}).limit(7).aggregate([
 
@@ -35,9 +39,34 @@ router.get("/api/workouts/range", (req, res) => {
                 totalReps: { $sum: "$exercises.reps"},
                 totalDistance: { $sum: "$exercises.distance"}
         }
+    }
     ])
     .then(weekWorkouts => {
         res.json(weekWorkouts);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+});
+
+//post routes
+
+router.post("/api/workouts", (req, res) => {
+    db.day.create({})
+    .then(newDay => {
+        res.json(newDay);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+});
+
+router.put("/api/workouts/:id", ({ day, "excercises": [] }, res) => {
+    db.day.findByIdAndUpdate(
+        params.id, { $push: { exercises: body } }, { new: true, runValidators: true }
+    )
+    .then(updateId => {
+        res.json(updateId);
     })
     .catch(err => {
         res.json(err);
