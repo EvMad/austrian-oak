@@ -24,3 +24,22 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
+router.get("/api/workouts/range", (req, res) => {
+    db.day.find({}).limit(7).aggregate([
+
+        {
+            $addFields: {
+                totalDuration: {$sum: "$exercises.duration"},
+                totalWeight: { $sum: "$execrcises.weight"},
+                totalSets: { $sum: "$exercises.sets"},
+                totalReps: { $sum: "$exercises.reps"},
+                totalDistance: { $sum: "$exercises.distance"}
+        }
+    ])
+    .then(weekWorkouts => {
+        res.json(weekWorkouts);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+});
