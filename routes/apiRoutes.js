@@ -6,8 +6,7 @@ console.log(Day);
 
 //get all aggregate
 router.get("/api/workouts", (req, res) => {
-    //from Ask BCS:  
-    // Day.find({}).then( (days) => console.log(days) )
+    
     Day.aggregate([
         
         {
