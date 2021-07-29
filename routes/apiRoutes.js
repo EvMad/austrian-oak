@@ -2,11 +2,12 @@ const router = require('express').Router()
 
 const db = require("../models/day")
 
+console.log(db);
 
 //get all aggregate
 router.get("/api/workouts", (req, res) => {
 
-    db.day.exercises.aggregate([
+    db.aggregate([
         
         {
 
@@ -29,7 +30,7 @@ router.get("/api/workouts", (req, res) => {
 
 // get range aggregate
 router.get("/api/workouts/range", (req, res) => {
-    db.day.find({}).limit(7).aggregate([
+    db.find({}).limit(7).aggregate([
 
         {
             $addFields: {
