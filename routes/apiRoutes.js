@@ -1,13 +1,14 @@
 const router = require('express').Router()
 
-const db = require("../models/day")
+const Day = require("../models/day")
 
-console.log(db);
+console.log(Day);
 
 //get all aggregate
 router.get("/api/workouts", (req, res) => {
-
-    db.aggregate([
+    //from Ask BCS:  
+    // Day.find({}).then( (days) => console.log(days) )
+    Day.aggregate([
         
         {
 
@@ -30,7 +31,7 @@ router.get("/api/workouts", (req, res) => {
 
 // get range aggregate
 router.get("/api/workouts/range", (req, res) => {
-    db.find({}).limit(7).aggregate([
+    Day.find({}).limit(7).aggregate([
 
         {
             $addFields: {
@@ -53,7 +54,7 @@ router.get("/api/workouts/range", (req, res) => {
 //post routes
 
 router.post("/api/workouts", (req, res) => {
-    db.day.create({})
+    Day.create({})
     .then(newDay => {
         res.json(newDay);
     })
@@ -66,7 +67,7 @@ router.post("/api/workouts", (req, res) => {
 // body = { day, "excercises": [] } ???
 
 router.put("/api/workouts/:id", ( { body }, res) => {
-    db.day.findByIdAndUpdate(
+    Day.findByIdAndUpdate(
         params.id, { $push: { exercises: body } }, { new: true, runValidators: true }
     )
     .then(updateId => {
@@ -80,7 +81,7 @@ router.put("/api/workouts/:id", ( { body }, res) => {
 // delete route
 
 router.delete("/api/workouts", ({ body }, res) => {
-    db.findByIdandDelete(body.id)
+    Day.findByIdandDelete(body.id)
     .then(() => {
         res.json(true);
     })
