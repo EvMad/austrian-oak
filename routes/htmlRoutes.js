@@ -6,7 +6,7 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, '..public/index.html'));
     });
 
-    app.get('/exercise?', (req, res) => {
+    app.get('/exercise', (req, res) => {
         console.log('clicked');
         res.sendFile(path.join(__dirname, '..public/exercise.html'));
     });
