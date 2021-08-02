@@ -31,7 +31,7 @@ router.get("/api/workouts", (req, res) => {
 // get range aggregate
 router.get("/api/workouts/range", (req, res) => {
     
-    Day.find({}).limit(7).aggregate([
+    Day.aggregate([
 
         {
             $addFields: {
@@ -42,7 +42,7 @@ router.get("/api/workouts/range", (req, res) => {
                 totalDistance: { $sum: "$exercises.distance"}
         }
     }
-    ])
+    ]).limit(7)
     .then(weekWorkouts => {
         res.json(weekWorkouts);
     })
