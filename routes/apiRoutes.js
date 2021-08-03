@@ -54,7 +54,7 @@ router.get("/api/workouts/range", (req, res) => {
 //post routes
 
 router.post("/api/workouts/", ({ body }, res) => {
-    
+    console.log(body);
     Day.create(body)
     .then(newDay => {
         res.json(newDay);
