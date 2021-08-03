@@ -8,5 +8,12 @@ This fitness tracker requires a Mongo instance, and uses Express to route the da
 
 ### Screencasts
 
+Adding Exercises:
+![add](addExercise.gif)
 
+Viewing Stats:
+![stats](stats.gif)
+
+Continue Workout:
+![continue](fitnessA.gif)
 
