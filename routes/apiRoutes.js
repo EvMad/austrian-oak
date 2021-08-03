@@ -1,6 +1,6 @@
-const router = require('express').Router()
-
-const Day = require("../models/day")
+const express = require('express');
+const router = require('express').Router();
+const Day = require("../models/day");
 
 console.log(Day);
 
@@ -53,8 +53,9 @@ router.get("/api/workouts/range", (req, res) => {
 
 //post routes
 
-router.post("/api/workouts", (req, res) => {
-    Day.create({})
+router.post("/api/workouts/", ({ body }, res) => {
+    
+    Day.create(body)
     .then(newDay => {
         res.json(newDay);
     })
@@ -66,9 +67,10 @@ router.post("/api/workouts", (req, res) => {
 
 // body = { day, "excercises": [] } ???
 
-router.put("/api/workouts/:id", ( { body }, res) => {
+router.put("/api/workouts/:id", ( req , res) => {
+    console.log(req.body)
     Day.findByIdAndUpdate(
-        Day.id, { $push: { exercises: body } }, { new: true, runValidators: true }
+       Day.id, { $push: { exercises: req.body } }, { new: true, runValidators: true }
     )
     .then(updateId => {
         res.json(updateId);
