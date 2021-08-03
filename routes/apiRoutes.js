@@ -70,7 +70,7 @@ router.post("/api/workouts/", ({ body }, res) => {
 router.put("/api/workouts/:id", ( req , res) => {
     console.log(req.body)
     Day.findByIdAndUpdate(
-       Day.id, { $push: { exercises: req.body } }, { new: true, runValidators: true }
+       { _id: req.params.id }, { $push: { exercises: req.body } }, { new: true, runValidators: true }
     )
     .then(updateId => {
         res.json(updateId);
